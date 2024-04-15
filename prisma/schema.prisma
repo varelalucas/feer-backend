@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @unique @default(autoincrement())
+  full_name     String
+  password      String
+  username      String   @unique
+  dt_created_at DateTime @default(now())
+  dt_updated_at DateTime @updatedAt
+}
+
+model Testimonial {
+  id            Int      @id @default(autoincrement())
+  testimonial   String
+  nm_person     String
+  dt_created_at DateTime @default(now())
+  dt_updated_at DateTime @updatedAt
+}
+
+model Project {
+  id Int @unique @default(autoincrement())
+
+  val_project     Float
+  val_condominium Float
+  val_iptu        Float
+
+  type_project     ProjectType @default(ALUGUEL)
+  st_disponibility Boolean
+
+  nm_project      String
+  ds_project      String @db.VarChar(420)
+  address_project String
+
+  arr_photos   Json
+  arr_drawings Json
+  arr_videos   Json
+
+  val_area      Int
+  num_bedrooms  Int
+  num_bathrooms Int
+  num_suits     Int
+  num_garage    Int
+  pet_friendly  Boolean
+
+  dt_created_at DateTime @default(now())
+  dt_updated_at DateTime @updatedAt
+}
+
+model Portfolio {
+  id Int @unique @default(autoincrement())
+
+  nm_portfolio String
+  ds_portfolio String
+  arr_photos   Json
+
+  type_portfolio String
+  val_duration   String
+  nm_client      String
+
+  dt_created_at DateTime @default(now())
+  dt_updated_at DateTime @updatedAt
+}
+
+enum ProjectType {
+  COMPRA
+  ALUGUEL
+}
