@@ -5,7 +5,9 @@
   "author": "Lucas Varela",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx --watch --env-file=.env src/core/app.ts"
+    "dev": "tsx --watch --env-file=.env src/core/app.ts",
+    "build": "rimraf ./dist && tsc",
+    "start": "node --env-file=.env dist/src/core/app.js"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
@@ -22,6 +24,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^3.2.5",
     "prisma": "^5.11.0",
+    "rimraf": "^5.0.5",
     "tsx": "^4.7.1",
     "typescript": "*"
   },
