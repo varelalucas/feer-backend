@@ -1,7 +1,7 @@
 DISPLAY_NAME=feer-back
-MAIN=index.js
+MAIN=dist/src/core/app.js
 MEMORY=1024
 SUBDOMAIN=feerconstrutora-backend
-START=npm install && npm run dev
+START=npm install && npm start
 VERSION=latest
 AUTORESTART=true

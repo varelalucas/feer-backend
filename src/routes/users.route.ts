@@ -1,10 +1,10 @@
 import express from 'express'
 
 // Controllers
-import { usersController } from '../controllers/user.controller'
+import { usersController } from '../controllers/user.controller.js'
 
 // Middlewares
-import { authorizationMiddleware } from '../middlewares/authorization.middleware'
+import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 
 const routerInstance = express.Router()
 

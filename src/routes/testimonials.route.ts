@@ -1,10 +1,10 @@
 import express from 'express'
 
 // Controllers
-import { testimonialsController } from '../controllers/testimonials.controller'
+import { testimonialsController } from '../controllers/testimonials.controller.js'
 
 // Middlewares
-import { authorizationMiddleware } from '../middlewares/authorization.middleware'
+import { authorizationMiddleware } from '../middlewares/authorization.middleware.js'
 
 const routerInstance = express.Router()
 

@@ -4,6 +4,7 @@
   "main": "index.js",
   "author": "Lucas Varela",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "dev": "tsx --watch --env-file=.env src/core/app.ts",
     "build": "rimraf ./dist && tsc",

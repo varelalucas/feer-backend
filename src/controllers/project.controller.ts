@@ -1,5 +1,5 @@
 import { type Request, type Response } from 'express'
-import { prisma } from '../core/prisma'
+import { prisma } from '../core/prisma.js'
 
 export const ProjectsController = {
   listAll: async (req: Request, res: Response) => {

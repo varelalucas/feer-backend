@@ -1,6 +1,6 @@
 import type express from 'express'
 import jwt from 'jsonwebtoken'
-import { prisma } from '../core/prisma'
+import { prisma } from '../core/prisma.js'
 
 export const authorizationMiddleware = async (
   req: express.Request,

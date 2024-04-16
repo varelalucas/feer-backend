@@ -1,20 +1,21 @@
 import express, { type RequestHandler } from "express";
-import fs from "fs";
 import chalk from "chalk";
 import cors from "cors";
 
 import { networkInterfaces } from "os";
 
-import { processResponseMiddleware } from "../middlewares/processResponse.middleware";
+import { processResponseMiddleware } from "../middlewares/processResponse.middleware.js";
 import { type User } from "@prisma/client";
+import { routerInstance as ProjectsRouter } from "../routes/projects.route.js";
+import { routerInstance as TestimonialsRouter } from "../routes/testimonials.route.js";
+import { routerInstance as UsersRouter } from "../routes/users.route.js";
+import { routerInstance as PortfolioRouter } from "../routes/portfolio.route.js";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(processResponseMiddleware as any);
-
-const routes: string[] = [];
 
 declare global {
   namespace Express {
@@ -38,22 +39,10 @@ declare global {
   }
 }
 
-fs.readdir("./src/routes", (event, files) => {
-  console.log("[app] files", files);
-  if (!event) {
-    files.forEach(async (file: string) => {
-      const { routerInstance }: { routerInstance: RequestHandler } =
-        await import(`../routes/${file}`);
-
-      routes.push(`/${file.replace(".route.ts", "")}`);
-
-      console.log("[app] routes", routes);
-      console.log("[app] /${file.replace", `/${file.replace(".route.ts", "")}`);
-
-      app.use(`/${file.replace(".route.ts", "")}`, routerInstance);
-    });
-  }
-});
+app.use("/projects", ProjectsRouter);
+app.use("/portfolio", PortfolioRouter);
+app.use("/users", UsersRouter);
+app.use("/testimonials", TestimonialsRouter);
 
 app.listen(process.env.API_PORT, () => {
   console.log(chalk.white("Iniciando a API..."));
