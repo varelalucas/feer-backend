@@ -24,7 +24,7 @@ model User {
 
 model Testimonial {
   id            Int      @id @default(autoincrement())
-  testimonial   String
+  testimonial   String   @db.VarChar(420)
   nm_person     String
   dt_created_at DateTime @default(now())
   dt_updated_at DateTime @updatedAt
@@ -63,7 +63,7 @@ model Portfolio {
   id Int @unique @default(autoincrement())
 
   nm_portfolio String
-  ds_portfolio String
+  ds_portfolio String @db.VarChar(420)
   arr_photos   Json
 
   type_portfolio String

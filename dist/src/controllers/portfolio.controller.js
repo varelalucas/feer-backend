@@ -3,18 +3,20 @@ export const portfolioController = {
     listAll: async (req, res) => {
         const { page, pageSize, filter } = req.query;
         const filterData = {
-            page: parseInt(`${page}`) | 0,
-            pageSize: parseInt(`${pageSize}`) | 10,
-            filter: filter || {},
+            page: parseInt(`${page}`) || 0,
+            pageSize: parseInt(`${pageSize}`) || 10,
+            filter: filter && typeof filter === "string" ? filter : "{}",
         };
-        console.log("[portfolio.controller] filterData", filterData);
         const findP = await prisma.portfolio.findMany({
             skip: filterData.page * filterData.pageSize,
             take: filterData.pageSize,
-            where: filterData.filter,
+            where: JSON.parse(filterData.filter),
+            orderBy: {
+                dt_created_at: "desc",
+            },
         });
         const totalP = await prisma.portfolio.count({
-            where: filterData.filter,
+            where: JSON.parse(filterData.filter),
         });
         if (findP) {
             return res.processResponse(200, "Lista de portfólios consultada com sucesso!", {
@@ -27,6 +29,9 @@ export const portfolioController = {
     },
     create: async (req, res) => {
         const { data } = req.body;
+        if (!data) {
+            return res.processResponse(400, "É necessário informar os dados do portfolio!");
+        }
         const createP = await prisma.portfolio.create({
             data,
         });

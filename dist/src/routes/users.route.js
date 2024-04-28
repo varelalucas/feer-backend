@@ -1,13 +1,14 @@
-import express from 'express';
+import express from "express";
 // Controllers
-import { usersController } from '../controllers/user.controller.js';
+import { usersController } from "../controllers/user.controller.js";
 // Middlewares
-import { authorizationMiddleware } from '../middlewares/authorization.middleware.js';
+import { authorizationMiddleware } from "../middlewares/authorization.middleware.js";
 const routerInstance = express.Router();
 // Login
-routerInstance.post('/login', usersController.login);
+routerInstance.post("/login", usersController.login);
 // Rotas de manipulação
-routerInstance.get('/all', usersController.listAll);
-routerInstance.post('/create', usersController.create);
-routerInstance.delete('/delete/:id', authorizationMiddleware, usersController.delete);
+routerInstance.get("/all", authorizationMiddleware, usersController.listAll);
+routerInstance.get("/me", authorizationMiddleware, usersController.listMe);
+routerInstance.post("/create", authorizationMiddleware, usersController.create);
+routerInstance.delete("/delete/:id", authorizationMiddleware, usersController.delete);
 export { routerInstance };

@@ -14,7 +14,7 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Testimonial` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `testimonial` VARCHAR(191) NOT NULL,
+    `testimonial` VARCHAR(420) NOT NULL,
     `nm_person` VARCHAR(191) NOT NULL,
     `dt_created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `dt_updated_at` DATETIME(3) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `Project` (
     `type_project` ENUM('COMPRA', 'ALUGUEL') NOT NULL DEFAULT 'ALUGUEL',
     `st_disponibility` BOOLEAN NOT NULL,
     `nm_project` VARCHAR(191) NOT NULL,
-    `ds_project` VARCHAR(191) NOT NULL,
+    `ds_project` VARCHAR(420) NOT NULL,
     `address_project` VARCHAR(191) NOT NULL,
     `arr_photos` JSON NOT NULL,
     `arr_drawings` JSON NOT NULL,
